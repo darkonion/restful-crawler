@@ -10,7 +10,8 @@ import java.util.List;
 
 public class DataHarvester {
 
-    private String remoteAddress;
+    private final String remoteAddress;
+    private final String SITE_ADDRESS = "https://www.phptravels.net/home";
 
     public DataHarvester(String remoteAddress) {
         this.remoteAddress = remoteAddress;
@@ -21,7 +22,7 @@ public class DataHarvester {
         List<Hotel> hotels;
 
         try {
-            driver.get("https://www.phptravels.net/home");
+            driver.get(SITE_ADDRESS);
             new HomePage(driver)
                     .inputQuery(query)
                     .processSearch();

@@ -2,6 +2,7 @@ package config;
 
 import com.codahale.metrics.health.HealthCheck;
 
+
 public class AppHealthCheck extends HealthCheck {
 
     @Override

@@ -7,6 +7,7 @@ import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import logic.DataHarvester;
 
+
 public class Main extends Application<BasicConfig> {
 
     public static void main(String[] args) throws Exception {
@@ -16,16 +17,15 @@ public class Main extends Application<BasicConfig> {
     @Override
     public void run(BasicConfig basicConfig, Environment environment) {
 
-        DataHarvester testSelenium = new DataHarvester(basicConfig.getRemoteAddress());
-        MainController controller = new MainController(testSelenium);
-
         environment
                 .healthChecks()
                 .register("application", new AppHealthCheck());
 
+        DataHarvester testSelenium = new DataHarvester(basicConfig.getRemoteAddress());
+
         environment
                 .jersey()
-                .register(controller);
+                .register(new MainController(testSelenium));
     }
 
     @Override

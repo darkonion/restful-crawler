@@ -19,8 +19,9 @@ public class WebDriverConfig {
         } catch (MalformedURLException e) {
             log.warning(e.getMessage());
         }
-        driver.manage().window().maximize();
 
+        driver.manage().window().maximize();
+        log.info("Driver successfully created");
         return driver;
     }
 }

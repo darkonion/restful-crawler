@@ -8,7 +8,7 @@ import org.openqa.selenium.support.ui.FluentWait;
 
 import java.time.Duration;
 
-public class WaitUtil {
+public final class WaitUtil {
 
     public static void waitUntil(ExpectedCondition<WebElement> condition, WebDriver webDriver) {
         FluentWait<WebDriver> wait = new FluentWait<>(webDriver);
