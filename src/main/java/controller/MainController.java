@@ -7,23 +7,24 @@ import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
-import javax.ws.rs.core.MediaType;
 import java.util.List;
 import java.util.Optional;
 
+import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+
 @Path("/api")
-@Produces(MediaType.APPLICATION_JSON)
+@Produces(APPLICATION_JSON)
 public class MainController {
 
-    private final DataHarvester testSelenium;
+    private final DataHarvester dataHarvester;
 
-    public MainController(DataHarvester testSelenium) {
-        this.testSelenium = testSelenium;
+    public MainController(DataHarvester dataHarvester) {
+        this.dataHarvester = dataHarvester;
     }
 
     @GET
     @Path("search")
     public List<Hotel> firstTest(@QueryParam("query") Optional<String> query) {
-        return testSelenium.getHotels(query.orElse("Dubai"));
+        return dataHarvester.getHotels(query.orElse("Dubai"));
     }
 }
