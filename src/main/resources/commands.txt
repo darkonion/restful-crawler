@@ -1,0 +1,11 @@
+Local:
+java -jar selenium-server-standalone-3.141.59.jar -role node -hub http://192.168.0.241:4444/grid/register -port 5566 -browser browserName=firefox,maxInstances=10
+java -jar selenium-server-standalone-3.141.59.jar -role hub
+
+AWS:
+
+sudo docker run -d -p 80:8080 -p 8081:8081 darkonion/restful-crawler:0.0.10
+
+sudo docker network create grid
+sudo docker run -d -p 4444:4444 -e GRID_MAX_SESSION=16 -e GRID_BROWSER_TIMEOUT=3000 -e GRID_TIMEOUT=3000 --name hub --network=grid selenium/hub
+sudo docker run -d -p 9002:5900 -e HUB_PORT_4444_TCP_ADDR=hub -e HUB_PORT_4444_TCP_PORT=4444 -e NODE_MAX_SESSION=5 -e NODE_MAX_INSTANCES=5 --volume=/dev/shm:/dev/shm --network=grid selenium/node-firefox
